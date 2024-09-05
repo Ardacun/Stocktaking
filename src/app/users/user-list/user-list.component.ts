@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-user-list',
   standalone: true,
@@ -9,4 +9,16 @@ import { Component } from '@angular/core';
 })
 export class UserListComponent {
 
+  // Users
+  users: any[] = [];
+  
+  // Inject user service
+  constructor(private userService: UserService) { }
+
+  // Get all users
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe(user => {
+      this.users = user;
+    });
+  }
 }

@@ -8,7 +8,7 @@ import { CategoryDetailComponent } from './categories/category-detail/category-d
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'items', component: ItemListComponent},

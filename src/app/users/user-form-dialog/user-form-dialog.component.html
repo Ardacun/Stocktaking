@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Add a new user</h2>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="add-user-form">
+        <div>
+            <label for="username">Username</label>
+            <input formControlName="username" id="username">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input formControlName="email" id="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input formControlName="password" id="password">
+        </div>
+        <div>
+            <label for="role">Role</label>
+            <select formControlName="role">
+                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+        </div>
+        <div>
+            <button (click)="onCancel()">Cancel</button>
+            <button type="submit">Save</button>
+        </div>
+</form>

@@ -1,1 +1,27 @@
-<p>user-list works!</p>
+<div>
+    <h2>Users Management</h2>
+    <button mat-button (click)="addUser()" class="btn btn-primary">Add New User</button>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.role}}</td>
+                    <td>
+                        <button mat-button class="btn btn-primary" (click)="editUser(user)">Edit</button>
+                        <button mat-button class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

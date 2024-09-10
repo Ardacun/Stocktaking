@@ -1,0 +1,52 @@
+<nav class="sidebar">
+    <ul>
+        <li>
+            <a (click)="navigate('dashboard')">
+                <i class="fa fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('items')">
+                <i class="fa fa-list"></i>
+                <span>Inventory</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('orders')">
+                <i class="fa fa-list"></i>
+                <span>Orders</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('users')">
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('reports')">
+                <i class="fa fa-th-list"></i>
+                <span>Reports</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('settings')">
+                <i class="fa fa-th-list"></i>
+                <span>Settings</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="navigate('login')">
+                <i class="fa fa-sign-in-alt"></i>
+                <span>Login</span>
+            </a>
+        </li>
+        <li>
+            <a (click)="onLogout()">
+                <i class="fa fa-users"></i>
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+</nav>

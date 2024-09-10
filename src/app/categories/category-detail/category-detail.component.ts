@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './category-detail.component.html',
   styleUrl: './category-detail.component.css'
 })
+
 export class CategoryDetailComponent {
   // Category
   category: any;

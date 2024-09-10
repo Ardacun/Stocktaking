@@ -1,0 +1,109 @@
+<div>
+    <h2>Settings</h2>
+    <div class="settings-wrapper">
+        <div class="setting">
+            <h3>General Settings</h3>
+            <div class="setting-content">
+                <div class="setting-item">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="language">Language</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="fr">French</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="currency">Currency</label>
+                    <select id="currency">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="gbp">GBP</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="dateFormat">Date Format</label>
+                    <select id="dateFormat">
+                        <option value="dd/mm/yyyy">dd/mm/yyyy</option>
+                        <option value="mm/dd/yyyy">mm/dd/yyyy</option>
+                        <option value="yyyy/mm/dd">yyyy/mm/dd</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="setting">
+            <h3>User Settings</h3>
+            <div class="setting-content">
+                <div class="setting-item">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Username">
+                </div>
+                <div class="setting-item">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+                <div class="setting-item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="setting">
+            <h3>Notifications</h3>
+            <div class="setting-content">
+                <div class="setting-item">
+                    <label for="notifications">Notifications</label>
+                    <select id="notifications">
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="notificationsFrequency">Notifications Frequency</label>
+                    <select id="notificationsFrequency">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="setting">
+            <h3>Security</h3>
+            <div class="setting-content">
+                <div class="setting-item">
+                    <label for="twoFactorAuthentication">Two-Factor Authentication</label>
+                    <select id="twoFactorAuthentication">
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="captcha">Captcha</label>
+                    <select id="captcha">
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="setting">
+            <h3>System</h3>
+            <div class="setting-content">
+                <div class="setting-item">
+                    <label for="backup">Backup</label>
+                    <select id="backup">
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button mat-button (click)="saveSettings()">Save</button>
+    </div>  
+</div>

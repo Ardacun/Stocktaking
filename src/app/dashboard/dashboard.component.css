@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-wrapper {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}  

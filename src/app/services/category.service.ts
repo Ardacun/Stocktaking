@@ -23,7 +23,12 @@ export class CategoryService {
   getCategoryById(id: number): Observable<any> {
     return this.http.get<any>(this.apiUrl + '/' + id);
   }
-  
+
+  // Returns category by name
+  getCategoryByName(name: string): Observable<any> {
+    return this.http.get<any>(this.apiUrl + '/name/' + name);
+  }
+
   // Creates new category
   createCategory(category: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, category);

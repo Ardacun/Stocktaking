@@ -6,6 +6,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemFormDialogComponent } from '../item-form-dialog/item-form-dialog.component';
+import { Item } from '../../models/item.model';
 @Component({
   selector: 'app-item-list',
   standalone: true,
@@ -16,7 +17,7 @@ import { ItemFormDialogComponent } from '../item-form-dialog/item-form-dialog.co
 export class ItemListComponent {
   
   // Items
-  items: any[] = [];
+  items: Item[] = [];
   categories = ['Electronics', 'Furniture', 'Clothing']; // Categories
   searchTerm = ''; // For search input
   selectedCategory = ''; // For filtering by category
@@ -28,34 +29,30 @@ export class ItemListComponent {
 
   // Get all items
   ngOnInit(): void {
-    this.itemService.getItems().subscribe(item => {
-      this.items = item;
+    this.itemService.getItems().subscribe((items: Item[]) => {
+      this.items = items;
     });
   }
 
   // Filter items based on search term and category
-  get filteredItems(): any[] {
+  get filteredItems(): Item[] {
     if (this.searchTerm) { // Filter by search term
       return this.items.filter(item => item.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
     } else if (this.selectedCategory) { // Filter by category
-      return this.items.filter(item => item.category === this.selectedCategory);
+      return this.items.filter(item => item.name === this.selectedCategory);
     } else { // No filter
       return this.items;
     }
   }
 
   // Edit item
-  editItem(item: any): void {
-    /*
-    this.itemService.updateItem(item).subscribe(updatedItem => {
-      const index = this.items.findIndex(i => i.id === updatedItem.id);
-      this.items[index] = updatedItem;
-    });
-    */
+  editItem(item: Item): void {
+  
     const dialogRef = this.dialog.open(ItemFormDialogComponent, {
       width: '500px',
       data: {
-        item: item
+        item: item,
+        isEditMode: true
       }
     });
 
@@ -63,15 +60,22 @@ export class ItemListComponent {
       if (result) {
         console.log("Updated item: " + result);
       }
+      this.itemService.getItems().subscribe(item => {
+        this.items = item;
+      });
     });
   }
 
   // Delete item
   deleteItem(item: any): void {
-    this.itemService.deleteItem(item).subscribe(() => {
+    this.itemService.deleteItem(item.id).subscribe(() => {
       const index = this.items.findIndex(i => i.id === item.id);
       this.items.splice(index, 1);
     });
+    this.itemService.getItems().subscribe((items: Item[]) => {
+      this.items = items;
+    });
+
   }
 
   // Change page
@@ -79,30 +83,21 @@ export class ItemListComponent {
     this.currentPage = page;
   }
 
-  /*
-  onSubmit(): void {
-    const item = this.form.value;
-     this.CategoryService.getCategoryByName(item.category).subscribe(category => {
-      item.categoryId = category.id;
-    }); 
-    this.itemService.createItem(item).subscribe(newItem => {
-      this.items.push(newItem);
-    });
-    this.form.reset();
-  }
-  */
-
   addItem(): void {
     const dialogRef = this.dialog.open(ItemFormDialogComponent, {
       width: '500px',
       data: {
-        categories: this.categories
+        categories: this.categories,
+        isEditMode: false
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("New item: " + result);
+        this.itemService.getItems().subscribe((items: Item[]) => {
+          this.items = items;
+        });
       }
     });
   }

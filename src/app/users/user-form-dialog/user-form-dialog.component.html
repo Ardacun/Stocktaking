@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Add a new user</h2>
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit user' : 'Add a new user' }}</h2>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="add-user-form">
         <div>
             <label for="username">Username</label>
@@ -18,8 +18,7 @@
                 <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
             </select>
         </div>
-        <div>
-            <button (click)="onCancel()">Cancel</button>
-            <button type="submit">Save</button>
+        <div mat-dialog-action>
+            <button type="submit">{{ isEditMode ? 'Update' : 'Save' }}</button>
         </div>
 </form>

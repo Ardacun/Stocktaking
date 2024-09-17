@@ -5,10 +5,11 @@ import { MatFormField, MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { error } from 'console';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, MatInputModule, MatInputModule, MatFormField, MatFormFieldModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatInputModule, MatFormField, MatFormFieldModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

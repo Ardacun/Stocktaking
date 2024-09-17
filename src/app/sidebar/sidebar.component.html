@@ -36,16 +36,23 @@
                 <span>Settings</span>
             </a>
         </li>
-        <li>
+        <li *ngIf="!isLoggedIn">
             <a (click)="navigate('login')">
                 <i class="fa fa-sign-in-alt"></i>
                 <span>Login</span>
             </a>
         </li>
-        <li>
+        <li *ngIf="isLoggedIn">
             <a (click)="onLogout()">
                 <i class="fa fa-users"></i>
                 <span>Logout</span>
+            </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+            <a>
+                <i class="fa fa-users"></i>
+                <img />
+                <span>Username</span>
             </a>
         </li>
     </ul>

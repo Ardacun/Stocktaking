@@ -1,43 +1,19 @@
 import { OrderItem } from "./orderitem.model";
 
 export class Order {
-    id: number;
-    userId: number;
-    date: Date;
-    status: string;
-    items: OrderItem[];
-    total: number;
+    id?: number;
+    user_id: number;
+    order_date: string;
+    order_status: string;
+    order_total: number;
 
-    constructor(id: number, userId: number, date: Date, status: string, items: OrderItem[], total: number) {
+    constructor(id: number, user_id: number, order_date: string, order_status: string, order_total: number) {
         this.id = id;
-        this.userId = userId;
-        this.date = date;
-        this.total = total;
-        this.status = status;
-        this.items = items;
+        this.user_id = user_id;
+        this.order_date = order_date;
+        this.order_total = order_total;
+        this.order_status = order_status;
     }
 
-    getId(): number {
-        return this.id;
-    }
-
-    getUserId(): number {
-        return this.userId;
-    }
-
-    getDate(): Date {
-        return this.date;
-    }
-
-    getTotal(): number {
-        return this.total;
-    }
-
-    getItems(): OrderItem[] {
-        return this.items;
-    }
-
-    getStatus(): string {
-        return this.status;
-    }
+   
 }

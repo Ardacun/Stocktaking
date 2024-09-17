@@ -1,29 +1,28 @@
 <h2 mat-dialog-title>{{ isEditMode ? 'Edit Item' : 'Add New Item' }}</h2>
 <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="add-item-form">
-        <mat-form-field appearance="outline">
+        <div appearance="outline">
+            <label for="name">Name</label>
             <input matInput formControlName="name" id="name">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label for="description">Description</mat-label>
-            <input matInput formControlName="description" id="description" placeholder="Enter your username">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label for="price">Price</mat-label>
-            <input matInput formControlName="price" id="price">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label for="quantity">Quantity</mat-label>
-            <input matInput formControlName="quantity" id="quantity">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label for="category">Category</mat-label>
-            <mat-select formControlName="category">
-                <option value="">All Categories</option>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input formControlName="description" id="description" placeholder="Enter your username">
+        </div>
+        <div>
+            <label for="price">Price</label>
+            <input formControlName="price" id="price">
+        </div>
+        <div>
+            <label for="quantity">Quantity</label>
+            <input formControlName="quantity" id="quantity">
+        </div>
+        <div>
+            <label for="category">Category</label>
+            <select formControlName="category_id">
                 <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-            </mat-select>
-        </mat-form-field>
-        <div class="btn-group" mat-dialog-actions>
-            <button mat-button (click)="onCancel()">Cancel</button>
+            </select>
+        </div>
+        <div class="btn-group">
             <button mat-button type="submit">{{ isEditMode ? 'Update' : 'Save' }}</button>
         </div>
 </form>

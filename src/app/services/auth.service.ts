@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   
   // Login user
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { username, password }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/login`, { username, password }, {withCredentials: true}).pipe(
       tap(response => {
         if(response.token) {
           localStorage.setItem('token', response.token);
@@ -28,21 +29,26 @@ export class AuthService {
   }
 
   // Register user
-  register(user: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl + '/register', user);
+  register(user: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, user);
   }
 
   // Logout user
   logout(): void {
-    localStorage.removeItem('token');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+    }
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
   }
 
   // Check if user is logged in
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token && !this.isTokenExpired(token);
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      return !!token && !this.isTokenExpired(token);
+    }
+    return false;
   }
 
   // Check if token is expired
@@ -52,6 +58,7 @@ export class AuthService {
     return expirationDate < new Date();
   }
 
+  // Decode JWT token
   private jwt_decode(token: string): any {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -63,6 +70,7 @@ export class AuthService {
     return JSON.parse(jsonPayload);
   }
 
+  // Check if token is valid
   private checkToken(token: string): boolean {
     if (!token) {
       return false;
@@ -72,5 +80,15 @@ export class AuthService {
       return false;
     }
     return true;
+  }
+
+  // Get user ID from token
+  getUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = this.jwt_decode(token);
+      return decoded.user_id;
+    }
+    return null;
   }
 }

@@ -5,6 +5,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { User } from '../../models/user.model';
 @Component({
   selector: 'app-user-list',
   standalone: true,
@@ -15,15 +16,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class UserListComponent {
 
   // Users
-  users: any[] = [];
+  users: User[] = [];
   
   // Inject user service
   constructor(private userService: UserService, public dialog: MatDialog) { }
 
   // Get all users
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(user => {
-      this.users = user;
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
     });
   }
 
@@ -31,36 +32,47 @@ export class UserListComponent {
     const dialogRef = this.dialog.open(UserFormDialogComponent, {
       width: '500px',
       data: {
-        user: null
+        user: null,
+        isEditMode: false
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("New user: " + result);
+        this.userService.getUsers().subscribe((users: User[]) => {
+          this.users = users;
+        });
       }
     });
   }
   
-  editUser(user: any): void {
+  editUser(user: User): void {
     const dialogRef = this.dialog.open(UserFormDialogComponent, {
       width: '500px',
       data: {
-        user: null
+        user: user,
+        isEditMode: true
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("Updated user: " + result);
+        this.userService.getUsers().subscribe((users: User[]) => {
+          this.users = users;
+        });
       }
     });
   }
 
-  deleteUser(user: any): void {
-    this.userService.deleteUser(user).subscribe(() => {
+  deleteUser(user: User): void {
+    this.userService.deleteUser(user.id).subscribe(() => {
       const index = this.users.findIndex(i => i.id === user.id);
       this.users.splice(index, 1);
+    });
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
     });
   }
 }

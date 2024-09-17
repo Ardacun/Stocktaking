@@ -1,21 +1,20 @@
 <h2 mat-dialog-title>Request a new order</h2>
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="add-order-form">
-        <mat-form-field>
-            <mat-label>Items</mat-label>
-            <mat-select formControlName="items" multiple>
-                <mat-option *ngFor="let item of items" [value]="item.id">
+        <div>
+            <label>Items</label>
+            <select formControlName="items" multiple>
+                <option *ngFor="let item of items" [value]="item.id">
                     {{item.name}} (Stock: {{item.quantity}})
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="orderForm.get('items')?.hasError('required')">
+                </option>
+            </select>
+            <div *ngIf="orderForm.get('items')?.hasError('required')">
                 Please select at least one item.
-            </mat-error>
-        </mat-form-field>
+            </div>
+        </div>
         <div>
             <h2>Total: {{orderForm.get('total')?.value}}</h2>
         </div>
         <div mat-dialog-actions>
-            <button mat-button (click)="onNoClick()">Cancel</button>
-            <button mat-button [mat-dialog-close]="true" (click)="onSubmit()">Save</button>
+            <button mat-button type="submit" [mat-dialog-close]="true" (click)="onSubmit()">Save</button>
         </div>
 </form>

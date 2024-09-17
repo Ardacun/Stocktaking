@@ -1,3 +1,4 @@
+
 export class Item {
 
     id: number;
@@ -6,16 +7,16 @@ export class Item {
     description: string;
     price: number;
     quantity: number;
-    categoryId: number;
+    category_id: number;
 
-    constructor(id: number, name: string, description: string, price: number, userId: number, quantity: number, categoryId: number) {
+    constructor(id: number, name: string, description: string, price: number, userId: number, quantity: number, category_id: number) {
         this.userId = userId;
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
-        this.categoryId = categoryId;
+        this.category_id = category_id;
     }
 
     getId(): number {
@@ -43,7 +44,7 @@ export class Item {
     }
 
     getCategoryId(): number {
-        return this.categoryId;
+        return this.category_id;
     }
 
 }

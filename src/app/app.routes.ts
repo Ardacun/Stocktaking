@@ -17,14 +17,14 @@ import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
-    {path: 'items', component: ItemListComponent, canActivate: [authGuard]},
+    {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+    {path: 'items', component: ItemListComponent, canActivate: [authGuard] },
     {path: 'item/:id', component: ItemDetailComponent, canActivate: [authGuard]},
     {path: 'categories', component: CategoryListComponent, canActivate: [authGuard]},
     {path: 'category/:id', component: CategoryDetailComponent, canActivate: [authGuard]},
-    {path: 'users', component: UserListComponent, /* anActivate: [authGuard] */},
+    {path: 'users', component: UserListComponent, canActivate: [authGuard] },
     {path: 'user/:id', component: UserDetailComponent, canActivate: [authGuard]},
-    {path: 'orders', component: OrderListComponent, canActivate: [authGuard]},
+    {path: 'orders', component: OrderListComponent, canActivate: [authGuard] },
     {path: 'order/:id', component: OrderDetailComponent, canActivate: [authGuard]},
     {path: 'reports', component: ReportListComponent, canActivate: [authGuard]},
     {path: 'settings', component: SettingListComponent, canActivate: [authGuard]},

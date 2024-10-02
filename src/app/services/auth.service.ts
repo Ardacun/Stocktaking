@@ -42,14 +42,23 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  // Helper function to get a cookie by name
+  getCookie(name: string): string | null {
+    const matches = document.cookie.match(new RegExp(
+      `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`
+    ));
+    return matches ? decodeURIComponent(matches[1]) : null;
+  }
+
   // Check if user is logged in
   isAuthenticated(): boolean {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+      const token = this.getCookie('auth_token');
       return !!token && !this.isTokenExpired(token);
     }
     return false;
   }
+
 
   // Check if token is expired
   isTokenExpired(token: string): boolean {
